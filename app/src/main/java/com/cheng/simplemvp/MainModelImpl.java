@@ -2,6 +2,8 @@ package com.cheng.simplemvp;
 
 import android.util.Log;
 
+import com.cheng.simplemvp.utils.AutoLog;
+
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -11,20 +13,25 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 
+/**
+ * 首页（模型）
+ */
 public class MainModelImpl implements MainModel {
+
     interface GitHubService {
         @GET("user.json")
-        Observable<List<User>> getUser();
+        Observable<List<UserBean>> getUser();
     }
 
     @Override
-    public Observable<List<User>> getDataFromNet() {
+    public Observable<List<UserBean>> getDataFromNet() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.icandemy.cn/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(new IoScheduler()))
                 .build();
         GitHubService gitHubService = retrofit.create(GitHubService.class);
+
         return gitHubService.getUser();
     }
 
@@ -35,6 +42,6 @@ public class MainModelImpl implements MainModel {
 
     @Override
     public void stopRequest() {
-        Log.i("model-stopped", "MainModelImpl stop request...");
+        AutoLog.i("model-stopped", "MainModelImpl stop request...");
     }
 }

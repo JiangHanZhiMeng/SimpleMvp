@@ -1,6 +1,5 @@
 package com.cheng.simplemvp;
 
-
 import com.cheng.simplemvplibrary.View;
 
 public interface MainView extends View {

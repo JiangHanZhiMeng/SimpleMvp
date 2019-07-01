@@ -1,6 +1,6 @@
 package com.cheng.simplemvp;
 
-public class User {
+public class UserBean {
     private String name;
     private int id;
 
@@ -18,5 +18,13 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "UserBean{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                '}';
     }
 }
